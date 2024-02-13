@@ -30,22 +30,31 @@ st.subheader("STEP2:")
 st.subheader("现在，请全神贯注回想你的问题，并且点击抽卡")
 st.button("抽三张卡")
 
+features_card = {
+    "Feature_1.png": [
+        "牌1的名字",
+        "这个牌的简短介绍这个牌的简短介绍这个牌的简短介绍这个牌的简短介绍",
+    ],
+    "Feature_2.png": [
+        "牌2的名字",
+        "这个牌的简短介绍这个牌的简短介绍这个牌的简短介绍这个牌的简短介绍",
+    ],
+    "Feature_3.png": [
+        "牌3的名字",
+        "这个牌的简短介绍这个牌的简短介绍这个牌的简短介绍这个牌的简短介绍",
+    ],
+}
+
 st.subheader("展示抽到了哪三张卡，卡1含义、卡2含义、卡3含义")
-col_1, col_2, col_3 = st.columns(3)
-col_1.image("assets\Feature_1.png", caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
-col_1.write(f"**{'这个牌的标题'}**")
-col_1.write('这个牌的简短介绍这个牌的简短介绍这个牌的简短介绍这个牌的简短介绍')
 
-
-col_2.image("assets\Feature_1.png", caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
-col_2.write(f"**{'这个牌的标题'}**")
-col_2.write('这个牌的简短介绍这个牌的简短介绍这个牌的简短介绍这个牌的简短介绍')
-
-col_3.image("assets\Feature_1.png", caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
-col_3.write(f"**{'这个牌的标题'}**")
-col_3.write('这个牌的简短介绍这个牌的简短介绍这个牌的简短介绍这个牌的简短介绍')
-
-
+for image ,description in features_card.items():
+    image = Image.open(ASSETS_DIR / image)
+    st.write("")
+    col_1, col_2, col_3 = st.columns(3)
+    col_1.image(image, use_column_width=True)
+    col_2.write(f"**{description[0]}**")
+    col_3.write(description[1])
+    
 
 # --- BUY BTN ---
 st.markdown(
