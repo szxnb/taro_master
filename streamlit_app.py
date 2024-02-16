@@ -2,6 +2,7 @@ import streamlit as st
 from pathlib import Path
 from PIL import Image  # pip install pillow
 import random
+import re
 
 # --- PATH SETTINGS ---
 THIS_DIR = Path(__file__).parent if "__file__" in locals() else Path.cwd()
@@ -150,11 +151,15 @@ def draw_card():
         if user_question == '':
             st.warning("Please enter your question first")
         else:
-            user_already_draw = True
             pre_user_question = user_question
             #一共有22张卡牌，不重复地抽3张卡
             unique_elements = get_unique_elements(features_card, 3)
             st.subheader("The 3 cards you drew:")
+
+            # 给卡牌赋一下值，方便下一步传参
+            user_card1 = unique_elements[0]
+            user_card2 = unique_elements[1]
+            user_card3 = unique_elements[2]
 
             # 展示卡牌
             for card_name, card_info in features_card.items():
@@ -165,16 +170,21 @@ def draw_card():
                         col_1.image(image, use_column_width=True)
                         col_2.subheader(card_info[1])
                         col_2.write(card_info[2])
+            
+            # 传参并且显示购买按钮
+            show_buy_btn(user_card1, user_card2, user_card3)
 
-def show_buy_btn():
+
+def show_buy_btn(user_card1, user_card2, user_card3):
     st.markdown(
-        f'<a href={PAYPAL_CHECKOUT} class="button">👉 View Divination Report</a>',
+        f'''
+            <a href="{PAYPAL_CHECKOUT}?question={user_question}&card1={user_card1}&card2={user_card2}&card3={user_card3}" class="button">👉 View Divination Report</a>
+        ''',
         unsafe_allow_html=True,
     )
 
 if st.button("Click to draw 3 card"):
    draw_card()
-   show_buy_btn()
 
 # --- User reviews ---
 st.write("")
