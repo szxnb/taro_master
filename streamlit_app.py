@@ -187,33 +187,33 @@ if st.button("Click to draw 3 card"):
    draw_card()
 
 # --- User reviews ---
-st.write("")
-st.write("---")
-st.write(f"\n")
+# st.write("")
+# st.write("---")
+# st.write(f"\n")
 
 
-st.subheader(":rocket: User reviews")
-features = {
-    "Feature_1.png": [
-        "Run Python Files From Excel",
-        "After locating your Python interpreter, you can execute Python files directly from Excel. In the Pro Version, you can also add several Python interpreter paths. This is helpful when you need to execute your Python code from different virtual environments.",
-    ],
-    "Feature_2.png": [
-        "Create Pandas Dataframes",
-        "Generate Python files with a click of a button. Select the cell range you want to transform, and the add-in creates the Python code to read in the Excel data as a pandas dataframe.Instead of messing around with all of the available options in the pandas ‘read_excel’ method, the add-in does it for you.",
-    ],
-    "Feature_3.png": [
-        "Create Jupyter Notebooks",
-        "Have you ever wanted to do some quick analysis of your Excel data in a Jupyter Notebook? MyToolBelt can convert an Excel cell range into a Jupyter Notebook. Just select the cell range, and the add-in will create a new Jupyter Notebook in the workbook’s directory. Inside the Jupyter Notebook, you will find your ready-to-use dataframe based on your selection. This feature is a real time saver!",
-    ],
-}
-for image, description in features.items():
-    image = Image.open(ASSETS_DIR / image)
-    st.write("")
-    left_col, right_col = st.columns(2)
-    left_col.image(image, use_column_width=True)
-    right_col.write(f"**{description[0]}**")
-    right_col.write(description[1])
+# st.subheader(":rocket: User reviews")
+# features = {
+#     "Feature_1.png": [
+#         "Run Python Files From Excel",
+#         "After locating your Python interpreter, you can execute Python files directly from Excel. In the Pro Version, you can also add several Python interpreter paths. This is helpful when you need to execute your Python code from different virtual environments.",
+#     ],
+#     "Feature_2.png": [
+#         "Create Pandas Dataframes",
+#         "Generate Python files with a click of a button. Select the cell range you want to transform, and the add-in creates the Python code to read in the Excel data as a pandas dataframe.Instead of messing around with all of the available options in the pandas ‘read_excel’ method, the add-in does it for you.",
+#     ],
+#     "Feature_3.png": [
+#         "Create Jupyter Notebooks",
+#         "Have you ever wanted to do some quick analysis of your Excel data in a Jupyter Notebook? MyToolBelt can convert an Excel cell range into a Jupyter Notebook. Just select the cell range, and the add-in will create a new Jupyter Notebook in the workbook’s directory. Inside the Jupyter Notebook, you will find your ready-to-use dataframe based on your selection. This feature is a real time saver!",
+#     ],
+# }
+# for image, description in features.items():
+#     image = Image.open(ASSETS_DIR / image)
+#     st.write("")
+#     left_col, right_col = st.columns(2)
+#     left_col.image(image, use_column_width=True)
+#     right_col.write(f"**{description[0]}**")
+#     right_col.write(description[1])
 
 
 # --- FAQ ---
