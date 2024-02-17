@@ -155,7 +155,6 @@ def draw_card():
         if user_question == '':
             st.warning("Please enter your question first")
         else:
-            st.toast('Card drawn successfully!', icon='😍')
             pre_user_question = user_question
             #一共有22张卡牌，不重复地抽3张卡
             unique_elements = get_unique_elements(features_card, 3)
