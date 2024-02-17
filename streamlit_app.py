@@ -8,6 +8,7 @@ import re
 THIS_DIR = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 ASSETS_DIR = THIS_DIR / "assets"
 ASSETS_CARDS_DIR = THIS_DIR / "assets/cards"
+ASSETS_DIR = THIS_DIR / "assets"
 STYLES_DIR = THIS_DIR / "styles"
 CSS_FILE = STYLES_DIR / "main.css"
 
@@ -138,6 +139,9 @@ load_css_file(CSS_FILE)
 
 #### 页面布局  ####
 
+banner_image = Image.open(ASSETS_DIR / 'bannerimage7.png')
+st.image(banner_image, use_column_width = True)
+
 st.title("🧙 Tarot Card Reading")
 
 user_question = st.text_input('Please enter the question you want to divine (eg: Will my love go smoothly in the next month?)', '')
@@ -151,6 +155,7 @@ def draw_card():
         if user_question == '':
             st.warning("Please enter your question first")
         else:
+            st.toast('Card drawn successfully!', icon='😍')
             pre_user_question = user_question
             #一共有22张卡牌，不重复地抽3张卡
             unique_elements = get_unique_elements(features_card, 3)
@@ -162,15 +167,29 @@ def draw_card():
             user_card3 = unique_elements[2]
 
             # 展示卡牌
-            for card_name, card_info in features_card.items():
-                for element in unique_elements:
-                    if element == card_name:
-                        image = Image.open(ASSETS_CARDS_DIR / card_info[0])
-                        col_1, col_2 = st.columns(2)
-                        col_1.image(image, use_column_width=True)
-                        col_2.subheader(card_info[1])
-                        col_2.write(card_info[2])
-            
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                image1 = Image.open(ASSETS_CARDS_DIR / features_card[user_card1][0])
+                st.image(image1 ,caption='Card1: '+ user_card1)
+
+            with col2:
+                image2 = Image.open(ASSETS_CARDS_DIR / features_card[user_card2][0])
+                st.image(image2 ,caption='Card2: '+ user_card2)
+
+            with col3:
+                image3 = Image.open(ASSETS_CARDS_DIR / features_card[user_card3][0])
+                st.image(image3 ,caption='Card3: '+ user_card3)
+
+            # 展示卡牌
+            # for card_name, card_info in features_card.items():
+            #     for element in unique_elements:
+            #         if element == card_name:
+            #             image = Image.open(ASSETS_CARDS_DIR / card_info[0])
+            #             col_1, col_2 = st.columns(2)
+            #             col_1.image(image, use_column_width=True)
+            #             col_2.subheader(card_info[1])
+            #             col_2.write(card_info[2])
+
             # 传参并且显示购买按钮
             show_buy_btn(user_card1, user_card2, user_card3)
 
@@ -217,20 +236,19 @@ if st.button("Click to draw 3 card"):
 
 
 # --- FAQ ---
-st.write("")
 st.write("---")
 st.subheader(":raising_hand: FAQ")
 faq = {
-    "Question 1": "Some text goes here to answer question 1",
-    "Question 2": "Some text goes here to answer question 2",
-    "Question 3": "Some text goes here to answer question 3",
+    "Payment failed": "Please refresh this page and reinitiate payment or contact our email",
+    "Didn’t receive report email in email": "Please make sure you have paid for your order and provided your correct email address. Or you can check the trash in the email. The email may be converted to spam and blocked.",
+    "Don't know how to ask a question": "You can only ask one question at a time. Please describe your problem within 50 words.",
 }
 for question, answer in faq.items():
     with st.expander(question):
         st.write(answer)
 
 # --- CONTACT FORM ---
-st.write("")
+st.write("---")
 st.subheader(":mailbox: Have A Question? Ask Away!")
 contact_form = f"""
 <form action="https://formsubmit.co/{CONTACT_EMAIL}" method="POST">
