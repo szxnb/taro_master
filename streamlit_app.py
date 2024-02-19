@@ -127,7 +127,7 @@ features_card = {
 }
 
 # --- GENERAL SETTINGS ---
-PAYPAL_CHECKOUT = "http://localhost:3000"
+PAYPAL_CHECKOUT = "http://34.214.168.14:3000"
 CONTACT_EMAIL = "3500466989@qq.com"
 
 
