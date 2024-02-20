@@ -128,7 +128,7 @@ features_card = {
 
 # --- GENERAL SETTINGS ---
 PAYPAL_CHECKOUT = "http://34.214.168.14:3000"
-CONTACT_EMAIL = "3500466989@qq.com"
+CONTACT_EMAIL = "pakqoostudio1@hotmail.com"
 
 
 def load_css_file(css_file_path):
@@ -139,12 +139,13 @@ load_css_file(CSS_FILE)
 
 #### 页面布局  ####
 
-banner_image = Image.open(ASSETS_DIR / 'bannerimage7.png')
+banner_image = Image.open(ASSETS_DIR / 'bannerimage.png')
 st.image(banner_image, use_column_width = True)
 
-st.title("🧙 Tarot Card Reading")
+st.title("Enter a question and draw 3 cards")
 
-user_question = st.text_input('Please enter the question you want to divine (eg: Will my love go smoothly in the next month?)', '')
+user_question = st.text_input('Please enter the question you want to divine (for example: Will I meet my sweetheart next month?)', '')
+
 
 def get_unique_elements(d, count):
         keys = list(d.keys())
@@ -169,15 +170,15 @@ def draw_card():
             col1, col2, col3 = st.columns(3)
             with col1:
                 image1 = Image.open(ASSETS_CARDS_DIR / features_card[user_card1][0])
-                st.image(image1 ,caption='Card1: '+ user_card1)
+                st.image(image1 ,caption='Past: '+ user_card1)
 
             with col2:
                 image2 = Image.open(ASSETS_CARDS_DIR / features_card[user_card2][0])
-                st.image(image2 ,caption='Card2: '+ user_card2)
+                st.image(image2 ,caption='Present: '+ user_card2)
 
             with col3:
                 image3 = Image.open(ASSETS_CARDS_DIR / features_card[user_card3][0])
-                st.image(image3 ,caption='Card3: '+ user_card3)
+                st.image(image3 ,caption='Future: '+ user_card3)
 
             # 展示卡牌
             # for card_name, card_info in features_card.items():
@@ -196,47 +197,28 @@ def draw_card():
 def show_buy_btn(user_card1, user_card2, user_card3):
     st.markdown(
         f'''
-            <a href="{PAYPAL_CHECKOUT}?question={user_question}&card1={user_card1}&card2={user_card2}&card3={user_card3}" class="button">👉 View Divination Report</a>
+            <a href="{PAYPAL_CHECKOUT}?question={user_question}&card1={user_card1}&card2={user_card2}&card3={user_card3}" class="button">View Divination Report</a>
         ''',
         unsafe_allow_html=True,
     )
 
-if st.button("Click to draw 3 card"):
-   draw_card()
+button_click = st.button("Click to draw 3 card")
 
-# --- User reviews ---
-# st.write("")
-# st.write("---")
-# st.write(f"\n")
-
-
-# st.subheader(":rocket: User reviews")
-# features = {
-#     "Feature_1.png": [
-#         "Run Python Files From Excel",
-#         "After locating your Python interpreter, you can execute Python files directly from Excel. In the Pro Version, you can also add several Python interpreter paths. This is helpful when you need to execute your Python code from different virtual environments.",
-#     ],
-#     "Feature_2.png": [
-#         "Create Pandas Dataframes",
-#         "Generate Python files with a click of a button. Select the cell range you want to transform, and the add-in creates the Python code to read in the Excel data as a pandas dataframe.Instead of messing around with all of the available options in the pandas ‘read_excel’ method, the add-in does it for you.",
-#     ],
-#     "Feature_3.png": [
-#         "Create Jupyter Notebooks",
-#         "Have you ever wanted to do some quick analysis of your Excel data in a Jupyter Notebook? MyToolBelt can convert an Excel cell range into a Jupyter Notebook. Just select the cell range, and the add-in will create a new Jupyter Notebook in the workbook’s directory. Inside the Jupyter Notebook, you will find your ready-to-use dataframe based on your selection. This feature is a real time saver!",
-#     ],
-# }
-# for image, description in features.items():
-#     image = Image.open(ASSETS_DIR / image)
-#     st.write("")
-#     left_col, right_col = st.columns(2)
-#     left_col.image(image, use_column_width=True)
-#     right_col.write(f"**{description[0]}**")
-#     right_col.write(description[1])
-
+col1, col2, col3 = st.columns(3)
+if button_click:
+    draw_card()
+    col1.empty()
+    col2.empty()
+    col3.empty()
+else:
+    image0 = Image.open(ASSETS_CARDS_DIR / 'Card_0_Back.png')
+    col1.image(image0 ,caption='Past: '+ '')  
+    col2.image(image0 ,caption='Present: '+ '')
+    col3.image(image0 ,caption='Future: '+ '')
 
 # --- FAQ ---
 st.write("---")
-st.subheader(":raising_hand: FAQ")
+st.subheader("FAQ")
 faq = {
     "Payment failed": "Please refresh this page and reinitiate payment or contact our email",
     "Didn’t receive report email in email": "Please make sure you have paid for your order and provided your correct email address. Or you can check the trash in the email. The email may be converted to spam and blocked.",
@@ -248,7 +230,7 @@ for question, answer in faq.items():
 
 # --- CONTACT FORM ---
 st.write("---")
-st.subheader(":mailbox: Have A Question? Ask Away!")
+st.subheader("CONTACT US")
 contact_form = f"""
 <form action="https://formsubmit.co/{CONTACT_EMAIL}" method="POST">
      <input type="hidden" name="_captcha" value="false">
